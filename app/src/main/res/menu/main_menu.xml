@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_product"
+            android:icon="@drawable/ic_tsr"
+            android:title="@string/menu_1"/>
+        <item
+            android:id="@+id/menu_profile"
+            android:icon="@drawable/ic_person_outline_white_48dp"
+            android:title="@string/menu_2"/>
+        <item
+            android:id="@+id/menu_registration"
+            android:icon="@drawable/ic_event_note_white_36dp"
+            android:title="@string/menu_3"/>
+    </group>
+    <group android:id="@+id/system">
+        <item android:title="System">
+            <menu>
+                <item
+                    android:id="@+id/menu_logout"
+                    android:icon="@drawable/ic_power_settings_new_black_48dp"
+                    android:title="@string/menu_sign_out"/>
+            </menu>
+        </item>
+    </group>
+</menu>

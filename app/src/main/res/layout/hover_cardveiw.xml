@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/animation_area"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginRight="40dp"
+            android:id="@+id/add_cart"
+            android:src="@drawable/ic_add_basket"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <ImageView
+            android:id="@+id/view_detail"
+            android:src="@drawable/ic_remove_red_eye_white_36dp"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
+    </LinearLayout>
+</RelativeLayout>
