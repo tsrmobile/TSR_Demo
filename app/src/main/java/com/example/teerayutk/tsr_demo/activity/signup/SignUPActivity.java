@@ -40,11 +40,14 @@ public class SignUPActivity extends AppCompatActivity implements SignUPInterface
     @Bind(R.id.button_apply) Button buttonApply;
     @Bind(R.id.first_name) EditText firstName;
     @Bind(R.id.last_name) EditText lastName;
+    @Bind(R.id.mobile) EditText mobileNumber;
+    @Bind(R.id.id_number) EditText idcardNumber;
     @Bind(R.id.email_address) EditText emailAddress;
     @Bind(R.id.password) EditText password;
     @Bind(R.id.confirm_password) EditText confirmPassword;
     @Bind(R.id.agreeTerm) CheckBox checkBox;
     @Bind(R.id.privacy) TextView textViewPrivacy;
+    @Bind(R.id.id_error) TextView idcardError;
     @Bind(R.id.email_error) TextView emailError;
     @Bind(R.id.hintPassword) TextView hintPass;
     @Bind(R.id.confirmPasswordStatus) TextView confirmStatus;
@@ -171,6 +174,8 @@ public class SignUPActivity extends AppCompatActivity implements SignUPInterface
 
             }
         });
+
+        validateIdNumber();
     }
 
     @Override
@@ -249,5 +254,52 @@ public class SignUPActivity extends AppCompatActivity implements SignUPInterface
         } else {
             dialogShow(SweetAlertDialog.PROGRESS_TYPE, getResources().getString(R.string.dialog_title_loading), "");
         }
+    }
+
+    String[] idcard;
+    private int sum = 0;
+    private void validateIdNumber() {
+        idcardNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() != 13) {
+                    for (int i = 1, sum = 0; i < 12; i++) {
+                        sum += Integer.parseInt(s.subSequence(i, i + 1) + "")*(13-i);
+                        if ((11-sum%11)%10!=Integer.parseInt(s.subSequence(i, i + 1) + "")) {
+                            idcardError.setText("เลขที่บัตรประชาชนไม่ถูกต้อง");
+                            idcardError.setTextColor(getResources().getColor(R.color.Red));
+                        } else {
+                            idcardError.setText("");
+                        }
+                    }
+                } else {
+                    idcardError.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        /*String id = idcardNumber.getText().toString();
+        if (id.length() != 13) {
+            for (int i = 0, sum = 0; i < 12; i++) {
+                sum += Integer.parseInt(id.charAt(i) + "")*(13-i);
+                if ((11-sum%11)%10!=Integer.parseInt(id.charAt(12) + "")) {
+                    idcardError.setText("เลขที่บัตรประชาชนไม่ถูกต้อง");
+                    idcardError.setTextColor(getResources().getColor(R.color.Red));
+                } else {
+                    idcardError.setText("");
+                }
+            }
+        } else {
+            idcardError.setText("");
+        }*/
     }
 }

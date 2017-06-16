@@ -24,6 +24,7 @@
     <string name="form_hint_first_name">First name</string>
     <string name="form_hint_last_name">Last name</string>
     <string name="form_hint_mobile">Mobile</string>
+    <string name="form_hint_id_number">Id number</string>
     <string name="form_hint_email">Email</string>
     <string name="form_hint_password">Password</string>
     <string name="form_hint_confirm_password">Confirm password</string>

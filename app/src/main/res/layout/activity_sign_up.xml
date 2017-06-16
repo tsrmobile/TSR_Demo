@@ -97,6 +97,32 @@
 
                 <View
                     android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextForm">
+
+                    <EditText
+                        android:id="@+id/id_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/form_hint_id_number"
+                        android:textColor="@color/DarkGray"
+                        android:imeOptions="actionNext"
+                        android:maxLength="13"
+                        android:inputType="phone"
+                        android:singleLine="true"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/id_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
                     android:layout_height="20dp"/>
 
                 <TextView

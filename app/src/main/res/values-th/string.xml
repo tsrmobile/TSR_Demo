@@ -25,6 +25,7 @@
     <string name="form_hint_first_name">ชื่อ</string>
     <string name="form_hint_last_name">นามสกุล</string>
     <string name="form_hint_mobile">มือถือ</string>
+    <string name="form_hint_id_number">เลขที่บัตรประชาชน</string>
     <string name="form_hint_email">อีเมล</string>
     <string name="form_hint_password">รหัสผ่าน</string>
     <string name="form_hint_confirm_password">ยืนยันรหัสผ่าน</string>
