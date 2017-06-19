@@ -39,7 +39,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.catalog.CatalogActivity" />
         <activity android:name=".activity.catalog.CatalogDetailActivity" />
-        <activity android:name=".activity.signup.PrivacyActivity"></activity>
+        <activity android:name=".activity.signup.PrivacyActivity" />
+        <activity android:name=".activity.cart.CartActivity"></activity>
     </application>
 
 </manifest>

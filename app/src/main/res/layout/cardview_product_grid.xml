@@ -57,23 +57,22 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/product_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Price : 35,000.00"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/Gray"/>
-
-            <TextView
                 android:id="@+id/product_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Product name : product"
-                android:textSize="20sp"
-                android:textColor="@color/Gray"/>
+                android:textSize="24sp"
+                android:textColor="@color/Black"/>
+
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Price : 35,000.00"
+                android:textSize="22sp"
+                android:textColor="@color/Red"/>
 
         </LinearLayout>
 

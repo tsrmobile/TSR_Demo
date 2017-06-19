@@ -24,8 +24,6 @@ import com.example.teerayutk.tsr_demo.model.catalog.Product;
 import com.example.teerayutk.tsr_demo.utils.AnimateButton;
 import com.example.teerayutk.tsr_demo.utils.ConvertToCurrency;
 import com.example.teerayutk.tsr_demo.utils.ExtactCartItem;
-import com.liuguangqiang.swipeback.SwipeBackActivity;
-import com.liuguangqiang.swipeback.SwipeBackLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +34,7 @@ import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import me.relex.circleindicator.CircleIndicator;
 
-public class CatalogDetailActivity extends SwipeBackActivity implements View.OnClickListener {
+public class CatalogDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = CatalogDetailActivity.class.getSimpleName();
 
     private int item_amount = 0;
@@ -62,7 +60,6 @@ public class CatalogDetailActivity extends SwipeBackActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog_detail);
-        setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
         ButterKnife.bind(this);
         btnMinus.setOnClickListener(this);
         btnPlus.setOnClickListener(this);
@@ -81,7 +78,7 @@ public class CatalogDetailActivity extends SwipeBackActivity implements View.OnC
         viewPager.setAdapter(new ImageAdapter(CatalogDetailActivity.this, imageItemList));
         indicator.setViewPager(viewPager);
 
-        price.setText("฿" + ConvertToCurrency.Currency(product.getPrice().toString()) + ".-");
+        price.setText(ConvertToCurrency.Currency(product.getPrice().toString()) + " " + this.getResources().getString(R.string.product_thai_bath));
 
         StringBuilder sb = new StringBuilder();
         sb.delete(0, sb.length());

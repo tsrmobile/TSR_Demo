@@ -29,6 +29,7 @@ import com.android.tonyvu.sc.util.CartHelper;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.teerayutk.tsr_demo.R;
+import com.example.teerayutk.tsr_demo.activity.cart.CartActivity;
 import com.example.teerayutk.tsr_demo.activity.catalog.CatalogActivity;
 import com.example.teerayutk.tsr_demo.activity.catalog.CatalogDetailActivity;
 import com.example.teerayutk.tsr_demo.model.catalog.Product;
@@ -66,6 +67,7 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     private static final int FILTER = 02;
     private static final int CART = 03;
     private static final int PRODUCT_DETAIL = 04;
+    private static final int SHOPPING_CART = 06;
 
     private Product product;
     private int badgeQuantity = 0;
@@ -136,7 +138,8 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cart :
-                break;
+                /*getActivity().startActivityForResult(new Intent(getActivity(), CartActivity.class), SHOPPING_CART);
+                return true;*/
             default:
                 break;
         }

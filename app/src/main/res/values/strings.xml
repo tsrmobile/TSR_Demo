@@ -61,8 +61,10 @@
     <string name="product_title_price">Price</string>
     <string name="product_title_name">Name</string>
     <string name="product_title_detail"><b>Description</b></string>
+    <string name="product_thai_bath">Bath</string>
 
     <string name="add_to_cart">Add to cart</string>
+    <string name="check_out">Payment channel</string>
 
     <string name="add_cart_warning">Please insert at least 1 item</string>
 

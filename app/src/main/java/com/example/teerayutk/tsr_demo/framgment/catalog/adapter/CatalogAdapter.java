@@ -69,14 +69,13 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Product item = productList.get(position);
         stringBuilder = new StringBuilder();
         stringBuilder.append(item.getName());
-        //stringBuilder.append(context.getResources().getString(R.string.product_title_detail) + " : " + item.getDescription());
 
         if (holder instanceof GridHolder) {
             GridHolder gridHolder = (GridHolder) holder;
             Glide.with(context).load(item.getProductThumbs())
                     .placeholder(R.drawable.image_holder)
                     .into(gridHolder.productImg);
-            gridHolder.productPrice.setText(context.getResources().getString(R.string.product_title_price) + " " + ConvertToCurrency.Currency(item.getPrice() + ""));
+            gridHolder.productPrice.setText(ConvertToCurrency.Currency(item.getPrice() + "") + " " + context.getResources().getString(R.string.product_thai_bath));
             gridHolder.productDetail.setText(stringBuilder.toString());
             if (!item.getProductID().equals("1")) {
                 gridHolder.triangleLabelView.setVisibility(View.GONE);
@@ -89,7 +88,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Glide.with(context).load(item.getProductThumbs())
                     .placeholder(R.drawable.image_holder)
                     .into(listHolder.productImg);
-            listHolder.productPrice.setText(context.getResources().getString(R.string.product_title_price) + " " + ConvertToCurrency.Currency(item.getPrice() + ""));
+            listHolder.productPrice.setText(ConvertToCurrency.Currency(item.getPrice() + "") + " " + context.getResources().getString(R.string.product_thai_bath));
             listHolder.productDetail.setText(stringBuilder.toString());
             if (!item.getProductID().equals("1")) {
                 listHolder.triangleLabelView.setVisibility(View.GONE);

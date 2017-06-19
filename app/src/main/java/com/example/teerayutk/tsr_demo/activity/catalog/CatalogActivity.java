@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 
 import com.example.teerayutk.tsr_demo.R;
 import com.example.teerayutk.tsr_demo.activity.authentication.AuthenticationActivity;
+import com.example.teerayutk.tsr_demo.activity.cart.CartActivity;
 import com.example.teerayutk.tsr_demo.activity.signup.SignUPActivity;
 import com.example.teerayutk.tsr_demo.framgment.catalog.CatalogFragment;
 import com.example.teerayutk.tsr_demo.utils.ActivityResultBus;
@@ -39,6 +40,7 @@ public class CatalogActivity extends AppCompatActivity{
 
     private static final int SIGN_UP = 01;
     private static final int PRODUCT_DETAIL = 04;
+    private static final int SHOPPING_CART = 06;
     private MenuItem menuItemClicked;
     private ActionBarDrawerToggle drawerToggle;
 
@@ -158,10 +160,10 @@ public class CatalogActivity extends AppCompatActivity{
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.action_cart :
+                startActivityForResult(new Intent(getApplicationContext(), CartActivity.class), SHOPPING_CART);
                 break;
             default: break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

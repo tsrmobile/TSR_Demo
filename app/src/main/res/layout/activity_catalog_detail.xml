@@ -76,7 +76,7 @@
                 android:text="Price"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:textColor="@color/Black"/>
+                android:textColor="@color/Red"/>
 
         </RelativeLayout>
 
