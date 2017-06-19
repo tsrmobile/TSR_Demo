@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
 public class CatalogActivity extends AppCompatActivity{
 
     private static final int SIGN_UP = 01;
+    private static final int PRODUCT_DETAIL = 04;
     private MenuItem menuItemClicked;
     private ActionBarDrawerToggle drawerToggle;
 

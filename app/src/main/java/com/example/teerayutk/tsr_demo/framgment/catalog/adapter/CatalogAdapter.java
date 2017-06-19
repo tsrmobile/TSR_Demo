@@ -86,7 +86,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         } else if (holder instanceof ListHolder) {
             ListHolder listHolder = (ListHolder) holder;
-
             Glide.with(context).load(item.getProductThumbs())
                     .placeholder(R.drawable.image_holder)
                     .into(listHolder.productImg);
@@ -142,6 +141,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class GridHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        View hover;
         @Bind(R.id.product_thumbs_grid) ImageView productImg;
         @Bind(R.id.product_price) TextView productPrice;
         @Bind(R.id.product_detail) TextView productDetail;
@@ -152,7 +152,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ButterKnife.bind(this, itemView);
             //itemView.setOnClickListener(this);
             BlurLayout.setGlobalDefaultDuration(500);
-            View hover = LayoutInflater.from(context).inflate(R.layout.hover_cardveiw, null);
+            hover = LayoutInflater.from(context).inflate(R.layout.hover_cardveiw, null);
             ImageView addCart = (ImageView) hover.findViewById(R.id.add_cart);
             addCart.setOnClickListener(this);
 
@@ -198,6 +198,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class ListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        View hover;
         @Bind(R.id.product_thumbs_list) ImageView productImg;
         @Bind(R.id.product_price) TextView productPrice;
         @Bind(R.id.product_detail) TextView productDetail;
@@ -208,7 +209,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
             BlurLayout.setGlobalDefaultDuration(500);
-            View hover = LayoutInflater.from(context).inflate(R.layout.hover_cardveiw, null);
+            hover = LayoutInflater.from(context).inflate(R.layout.hover_cardveiw, null);
             ImageView addCart = (ImageView) hover.findViewById(R.id.add_cart);
             addCart.setOnClickListener(this);
 

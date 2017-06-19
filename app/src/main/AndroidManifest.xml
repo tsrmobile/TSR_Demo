@@ -32,11 +32,11 @@
         <activity
             android:name=".activity.authentication.AuthenticationActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize|locale"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.signup.SignUPActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.catalog.CatalogActivity" />
         <activity android:name=".activity.catalog.CatalogDetailActivity" />
         <activity android:name=".activity.signup.PrivacyActivity"></activity>

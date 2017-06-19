@@ -13,6 +13,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +29,7 @@ import com.android.tonyvu.sc.util.CartHelper;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.teerayutk.tsr_demo.R;
+import com.example.teerayutk.tsr_demo.activity.catalog.CatalogActivity;
 import com.example.teerayutk.tsr_demo.activity.catalog.CatalogDetailActivity;
 import com.example.teerayutk.tsr_demo.model.catalog.Product;
 import com.example.teerayutk.tsr_demo.framgment.catalog.adapter.CatalogAdapter;
@@ -155,7 +157,7 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PRODUCT_DETAIL && requestCode == RESULT_CANCELED) {
+        if (requestCode == PRODUCT_DETAIL && resultCode == RESULT_CANCELED) {
             getActivity().invalidateOptionsMenu();
         }
     }

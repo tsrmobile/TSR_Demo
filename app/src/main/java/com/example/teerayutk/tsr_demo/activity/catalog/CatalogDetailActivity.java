@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.example.teerayutk.tsr_demo.activity.catalog.adapter.ImageAdapter;
 import com.example.teerayutk.tsr_demo.model.cart.CartItem;
 import com.example.teerayutk.tsr_demo.model.catalog.Product;
 import com.example.teerayutk.tsr_demo.utils.AnimateButton;
+import com.example.teerayutk.tsr_demo.utils.ConvertToCurrency;
 import com.example.teerayutk.tsr_demo.utils.ExtactCartItem;
 import com.liuguangqiang.swipeback.SwipeBackActivity;
 import com.liuguangqiang.swipeback.SwipeBackLayout;
@@ -35,9 +37,11 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import me.relex.circleindicator.CircleIndicator;
 
 public class CatalogDetailActivity extends SwipeBackActivity implements View.OnClickListener {
+    private static final String TAG = CatalogDetailActivity.class.getSimpleName();
 
     private int item_amount = 0;
     private int badgeQuantity = 0;
+    private float initialX, initialY;
     private SweetAlertDialog sweetAlertDialog;
 
     Product product;
@@ -49,6 +53,8 @@ public class CatalogDetailActivity extends SwipeBackActivity implements View.OnC
     @Bind(R.id.minus) Button btnMinus;
     @Bind(R.id.plus) Button btnPlus;
     @Bind(R.id.txtAmount) TextView amount;
+    @Bind(R.id.price) TextView price;
+    @Bind(R.id.detail) TextView detail;
     @Bind(R.id.addToCart) Button addCart;
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.indicator) CircleIndicator indicator;
@@ -71,8 +77,17 @@ public class CatalogDetailActivity extends SwipeBackActivity implements View.OnC
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        imageItemList.add(product.getProductThumbs().toString());
         viewPager.setAdapter(new ImageAdapter(CatalogDetailActivity.this, imageItemList));
         indicator.setViewPager(viewPager);
+
+        price.setText("฿" + ConvertToCurrency.Currency(product.getPrice().toString()) + ".-");
+
+        StringBuilder sb = new StringBuilder();
+        sb.delete(0, sb.length());
+        sb.append("\n" + product.getName() + "\n\n");
+        sb.append(getResources().getString(R.string.product_title_detail) + "\n\t\t" + product.getProductDesc());
+        detail.setText(sb.toString());
     }
 
     private void readIntent() {

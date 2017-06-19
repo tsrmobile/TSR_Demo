@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    android:fitsSystemWindows="true"
-    android:windowSoftInputMode="adjustPan|adjustResize"
     tools:context=".activity.signup.SignUPActivity">
 
     <LinearLayout
@@ -25,6 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:windowSoftInputMode="adjustPan|adjustResize"
                 android:padding="16dp"
                 android:orientation="vertical">
 
@@ -236,26 +235,31 @@
 
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_alignParentBottom="true">
+
+                    <Button
+                        android:id="@+id/button_apply"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary"
+                        android:text="@string/form_button_apply"
+                        android:textColor="@color/White"
+                        android:textSize="18sp"/>
+
+                </RelativeLayout>
+
             </LinearLayout>
 
         </ScrollView>
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/button_apply"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:text="@string/form_button_apply"
-            android:textColor="@color/White"
-            android:textSize="18sp"/>
-
-    </RelativeLayout>
 
 </RelativeLayout>
+
+    <!--android:fitsSystemWindows="true"-->
