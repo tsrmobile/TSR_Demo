@@ -195,7 +195,7 @@ public class CatalogActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        invalidateOptionsMenu();
+        //invalidateOptionsMenu();
     }
 
     @Override
@@ -224,7 +224,7 @@ public class CatalogActivity extends AppCompatActivity{
         badgeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivityForResult(new Intent(ShoppingActivity.this, CartActivity.class), REQUEST_CART);
+                startActivityForResult(new Intent(getApplicationContext(), CartActivity.class), SHOPPING_CART);
             }
         });
 

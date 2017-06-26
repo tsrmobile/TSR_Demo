@@ -125,9 +125,9 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
             }
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_cart_item));
             textView.setText("" + badgeQuantity);
-            YoYo.with(Techniques.Tada)
+            /*YoYo.with(Techniques.Tada)
                     .duration(500)
-                    .playOn(badgeLayout);
+                    .playOn(badgeLayout);*/
         } else {
             imageView.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);

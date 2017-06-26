@@ -2,6 +2,7 @@ package com.example.teerayutk.tsr_demo.activity.cart;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ public class CartActivity extends AppCompatActivity {
     List<CartItem> cartItemList = Collections.emptyList();
 
     @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.recyclerview_cart) RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +41,7 @@ public class CartActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cartItemList = new ExtactCartItem().getCartItems(cart);
-
-        Log.e("Cart item", cartItemList.size() + "");
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
