@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,20 +19,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.android.tonyvu.sc.model.Cart;
+import com.android.tonyvu.sc.util.CartHelper;
 import com.example.teerayutk.tsr_demo.R;
 import com.example.teerayutk.tsr_demo.activity.authentication.AuthenticationActivity;
 import com.example.teerayutk.tsr_demo.activity.cart.CartActivity;
 import com.example.teerayutk.tsr_demo.activity.signup.SignUPActivity;
 import com.example.teerayutk.tsr_demo.framgment.catalog.CatalogFragment;
+import com.example.teerayutk.tsr_demo.model.cart.CartItem;
 import com.example.teerayutk.tsr_demo.utils.ActivityResultBus;
 import com.example.teerayutk.tsr_demo.utils.ActivityResultEvent;
 import com.example.teerayutk.tsr_demo.utils.AnimateButton;
 import com.example.teerayutk.tsr_demo.utils.Config;
+import com.example.teerayutk.tsr_demo.utils.ExtactCartItem;
 import com.example.teerayutk.tsr_demo.utils.LanguageHelper;
 import com.example.teerayutk.tsr_demo.utils.MyApplication;
 import com.yalantis.guillotine.animation.GuillotineAnimation;
+
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,6 +54,11 @@ public class CatalogActivity extends AppCompatActivity{
     private static final int SHOPPING_CART = 06;
     private MenuItem menuItemClicked;
     private ActionBarDrawerToggle drawerToggle;
+
+    private int badgeQuantity = 0;
+    Cart cart = CartHelper.getCart();
+    List<CartItem> cartItemList = Collections.emptyList();
+
 
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.navigationView) NavigationView navigationView;
@@ -174,5 +190,44 @@ public class CatalogActivity extends AppCompatActivity{
         if (requestCode == SIGN_UP && resultCode == RESULT_CANCELED) {
             navigationView.getMenu().getItem(0).setChecked(true);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        invalidateOptionsMenu();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.shopping_cart, menu);
+        MenuItem item = menu.findItem(R.id.action_cart);
+        MenuItemCompat.setActionView(item, R.layout.counter_menuitem_layout);
+        RelativeLayout badgeLayout = (RelativeLayout) MenuItemCompat.getActionView(item);
+        ImageView imageView = (ImageView) badgeLayout.findViewById(R.id.counterBackground);
+        TextView textViewCount = (TextView) badgeLayout.findViewById(R.id.count);
+
+        cartItemList = new ExtactCartItem().getCartItems(cart);
+
+        if (cartItemList.size() > 0) {
+            for (int i = 0; i < cartItemList.size(); i ++) {
+                final CartItem cartItem = cartItemList.get(i);
+                badgeQuantity += Integer.parseInt(cartItem.getQuantity() + "");
+            }
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_cart_item));
+            textViewCount.setText("" + badgeQuantity);
+        } else {
+            imageView.setVisibility(View.GONE);
+            textViewCount.setVisibility(View.GONE);
+        }
+
+        badgeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivityForResult(new Intent(ShoppingActivity.this, CartActivity.class), REQUEST_CART);
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

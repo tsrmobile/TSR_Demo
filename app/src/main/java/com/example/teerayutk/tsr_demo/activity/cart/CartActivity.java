@@ -3,13 +3,25 @@ package com.example.teerayutk.tsr_demo.activity.cart;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 
+import com.android.tonyvu.sc.model.Cart;
+import com.android.tonyvu.sc.util.CartHelper;
 import com.example.teerayutk.tsr_demo.R;
+import com.example.teerayutk.tsr_demo.model.cart.CartItem;
+import com.example.teerayutk.tsr_demo.utils.ExtactCartItem;
+
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CartActivity extends AppCompatActivity {
+
+    Cart cart = CartHelper.getCart();
+    List<CartItem> cartItemList = Collections.emptyList();
 
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Override
@@ -25,5 +37,23 @@ public class CartActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        cartItemList = new ExtactCartItem().getCartItems(cart);
+
+        Log.e("Cart item", cartItemList.size() + "");
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home :
+                setResult(RESULT_CANCELED);
+                finish();
+                break;
+            default: break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

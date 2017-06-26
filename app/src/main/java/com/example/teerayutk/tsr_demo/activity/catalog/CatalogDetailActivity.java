@@ -1,5 +1,6 @@
 package com.example.teerayutk.tsr_demo.activity.catalog;
 
+import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.android.tonyvu.sc.model.Cart;
 import com.android.tonyvu.sc.util.CartHelper;
 import com.example.teerayutk.tsr_demo.R;
+import com.example.teerayutk.tsr_demo.activity.cart.CartActivity;
 import com.example.teerayutk.tsr_demo.activity.catalog.adapter.ImageAdapter;
 import com.example.teerayutk.tsr_demo.model.cart.CartItem;
 import com.example.teerayutk.tsr_demo.model.catalog.Product;
@@ -39,6 +41,7 @@ public class CatalogDetailActivity extends AppCompatActivity implements View.OnC
 
     private int item_amount = 0;
     private int badgeQuantity = 0;
+    private static final int SHOPPING_CART = 03;
     private float initialX, initialY;
     private SweetAlertDialog sweetAlertDialog;
 
@@ -119,6 +122,13 @@ public class CatalogDetailActivity extends AppCompatActivity implements View.OnC
             imageView.setVisibility(View.GONE);
             textViewCount.setVisibility(View.GONE);
         }
+
+        badgeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(getApplicationContext(), CartActivity.class), SHOPPING_CART);
+            }
+        });
 
         return super.onCreateOptionsMenu(menu);
     }

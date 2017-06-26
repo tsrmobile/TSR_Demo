@@ -88,7 +88,7 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_catalog, container, false);
         ButterKnife.bind(this, view);
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
         present = new CatalogPresenter(this);
         viewMode.setOnClickListener(this);
 
@@ -132,18 +132,13 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
             imageView.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
         }
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_cart :
-                /*getActivity().startActivityForResult(new Intent(getActivity(), CartActivity.class), SHOPPING_CART);
-                return true;*/
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+        badgeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivityForResult(new Intent(getActivity(), CartActivity.class), SHOPPING_CART);
+            }
+        });
     }
 
     @Override
@@ -161,7 +156,7 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PRODUCT_DETAIL && resultCode == RESULT_CANCELED) {
-            getActivity().invalidateOptionsMenu();
+            //getActivity().invalidateOptionsMenu();
         }
     }
 
