@@ -156,7 +156,7 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PRODUCT_DETAIL && resultCode == RESULT_CANCELED) {
-            //getActivity().invalidateOptionsMenu();
+            getActivity().invalidateOptionsMenu();
         }
     }
 
