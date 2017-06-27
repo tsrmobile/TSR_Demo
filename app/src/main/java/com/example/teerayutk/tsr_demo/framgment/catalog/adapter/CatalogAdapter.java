@@ -41,8 +41,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context context;
     private StringBuilder stringBuilder;
     private ClickListener clickListener;
-    private ClickListener cartListener;
-    private ClickListener viewListener;
     private List<Product> productList = new ArrayList<Product>();
     public CatalogAdapter(FragmentActivity activity, List<Product> productList) {
         this.context = activity;
@@ -53,7 +51,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
         if (viewType == VIEW_TYPE_GRID) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_product_grid, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_product, parent, false);
             changeView = true;
             viewHolder = new GridHolder(view);
         } else if (viewType == VIEW_TYPE_LIST) {
@@ -77,12 +75,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .into(gridHolder.productImg);
             gridHolder.productPrice.setText(ConvertToCurrency.Currency(item.getPrice() + "") + " " + context.getResources().getString(R.string.product_thai_bath));
             gridHolder.productDetail.setText(stringBuilder.toString());
-            if (!item.getProductID().equals("1")) {
-                gridHolder.triangleLabelView.setVisibility(View.GONE);
-            } else if (item.getProductID() == "1") {
-                gridHolder.triangleLabelView.setVisibility(View.VISIBLE);
-            }
-
         } else if (holder instanceof ListHolder) {
             ListHolder listHolder = (ListHolder) holder;
             Glide.with(context).load(item.getProductThumbs())
@@ -90,11 +82,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .into(listHolder.productImg);
             listHolder.productPrice.setText(ConvertToCurrency.Currency(item.getPrice() + "") + " " + context.getResources().getString(R.string.product_thai_bath));
             listHolder.productDetail.setText(stringBuilder.toString());
-            if (!item.getProductID().equals("1")) {
-                listHolder.triangleLabelView.setVisibility(View.GONE);
-            } else if (item.getProductID() == "1") {
-                listHolder.triangleLabelView.setVisibility(View.VISIBLE);
-            }
         }
     }
 
@@ -112,14 +99,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.clickListener = clickListener;
     }
 
-    public void addCartListener(ClickListener clickListener) {
-        this.cartListener = clickListener;
-    }
-
-    public void viewDetailListener(ClickListener clickListener) {
-        this.viewListener = clickListener;
-    }
-
     public void setChangeViewFalse() {
         changeView = false;
     }
@@ -134,120 +113,42 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public interface ClickListener{
         public void itemClicked(View view, int position);
-        public void addCart(View view, int position);
-        public void viewDetail(View view, int position);
     }
 
     public class GridHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        View hover;
-        @Bind(R.id.product_thumbs_grid) ImageView productImg;
+        @Bind(R.id.product_thumbs) ImageView productImg;
         @Bind(R.id.product_price) TextView productPrice;
         @Bind(R.id.product_detail) TextView productDetail;
-        @Bind(R.id.ribbinNew) TriangleLabelView triangleLabelView;
-        @Bind(R.id.blur_layout) BlurLayout blurLayout;
         public GridHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            //itemView.setOnClickListener(this);
-            BlurLayout.setGlobalDefaultDuration(500);
-            hover = LayoutInflater.from(context).inflate(R.layout.hover_cardveiw, null);
-            ImageView addCart = (ImageView) hover.findViewById(R.id.add_cart);
-            addCart.setOnClickListener(this);
-
-            ImageView viewDetail = (ImageView) hover.findViewById(R.id.view_detail);
-            viewDetail.setOnClickListener(this);
-
-            blurLayout.setHoverView(hover);
-            blurLayout.setBlurDuration(550);
-            blurLayout.setBlurRadius(20);
-            blurLayout.addChildAppearAnimator(hover, R.id.add_cart, Techniques.FlipInX, 550, 0);
-            blurLayout.addChildAppearAnimator(hover, R.id.view_detail, Techniques.FlipInX, 550, 250);
-
-            blurLayout.addChildDisappearAnimator(hover, R.id.add_cart, Techniques.FlipOutX, 550, 500);
-            blurLayout.addChildDisappearAnimator(hover, R.id.view_detail, Techniques.FlipOutX, 550, 250);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (clickListener != null) {
                 clickListener.itemClicked(v, getPosition());
-            }
-
-            switch (v.getId()) {
-                case R.id.add_cart :
-                    if (cartListener != null) {
-                        cartListener.addCart(v, getPosition());
-                        YoYo.with(Techniques.Tada)
-                                .duration(500)
-                                .playOn(v);
-                    }
-                    break;
-                case R.id.view_detail :
-                    if (viewListener != null) {
-                        viewListener.viewDetail(v, getPosition());
-                        YoYo.with(Techniques.Tada)
-                                .duration(500)
-                                .playOn(v);
-                    }
-                    break;
             }
         }
     }
 
     public class ListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        View hover;
-        @Bind(R.id.product_thumbs_list) ImageView productImg;
+        @Bind(R.id.product_thumbs) ImageView productImg;
         @Bind(R.id.product_price) TextView productPrice;
         @Bind(R.id.product_detail) TextView productDetail;
-        @Bind(R.id.ribbinNew) TriangleLabelView triangleLabelView;
-        @Bind(R.id.blur_layout) BlurLayout blurLayout;
         public ListHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
-            BlurLayout.setGlobalDefaultDuration(500);
-            hover = LayoutInflater.from(context).inflate(R.layout.hover_cardveiw, null);
-            ImageView addCart = (ImageView) hover.findViewById(R.id.add_cart);
-            addCart.setOnClickListener(this);
-
-            ImageView viewDetail = (ImageView) hover.findViewById(R.id.view_detail);
-            viewDetail.setOnClickListener(this);
-
-            blurLayout.setHoverView(hover);
-            blurLayout.setBlurDuration(550);
-            blurLayout.setBlurRadius(20);
-            blurLayout.addChildAppearAnimator(hover, R.id.add_cart, Techniques.FlipInX, 550, 0);
-            blurLayout.addChildAppearAnimator(hover, R.id.view_detail, Techniques.FlipInX, 550, 250);
-
-            blurLayout.addChildDisappearAnimator(hover, R.id.add_cart, Techniques.FlipOutX, 550, 500);
-            blurLayout.addChildDisappearAnimator(hover, R.id.view_detail, Techniques.FlipOutX, 550, 250);
         }
 
         @Override
         public void onClick(View v) {
             if (clickListener != null) {
                 clickListener.itemClicked(v, getPosition());
-            }
-
-            switch (v.getId()) {
-                case R.id.add_cart :
-                    if (cartListener != null) {
-                        cartListener.addCart(v, getPosition());
-                        YoYo.with(Techniques.Tada)
-                                .duration(550)
-                                .playOn(v);
-                    }
-                    break;
-                case R.id.view_detail :
-                    if (viewListener != null) {
-                        viewListener.viewDetail(v, getPosition());
-                        YoYo.with(Techniques.Tada)
-                                .duration(550)
-                                .playOn(v);
-                    }
-                    break;
             }
         }
     }

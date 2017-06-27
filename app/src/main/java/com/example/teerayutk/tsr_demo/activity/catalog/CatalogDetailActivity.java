@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.android.tonyvu.sc.model.Cart;
 import com.android.tonyvu.sc.util.CartHelper;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.teerayutk.tsr_demo.R;
 import com.example.teerayutk.tsr_demo.activity.cart.CartActivity;
 import com.example.teerayutk.tsr_demo.activity.catalog.adapter.ImageAdapter;
@@ -144,7 +146,7 @@ public class CatalogDetailActivity extends AppCompatActivity implements View.OnC
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home :
-                setResult(RESULT_CANCELED);
+                setResult(RESULT_OK);
                 finish();
                 break;
             default:

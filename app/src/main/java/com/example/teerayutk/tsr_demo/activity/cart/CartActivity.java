@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.android.tonyvu.sc.model.Cart;
 import com.android.tonyvu.sc.util.CartHelper;
@@ -22,11 +23,13 @@ import butterknife.ButterKnife;
 
 public class CartActivity extends AppCompatActivity {
 
-    CartAdapter adapter;
-    Cart cart = CartHelper.getCart();
-    List<CartItem> cartItemList = Collections.emptyList();
+    private float sumtotal = 0;
+    private CartAdapter adapter;
+    private Cart cart = CartHelper.getCart();
+    private List<CartItem> cartItemList = Collections.emptyList();
 
     @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.total_price) TextView totalPrice;
     @Bind(R.id.recyclerview_cart) RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,18 @@ public class CartActivity extends AppCompatActivity {
 
         adapter = new CartAdapter(CartActivity.this, cartItemList);
         recyclerView.setAdapter(adapter);
+
+        getTotalPrice();
+    }
+
+    private void getTotalPrice() {
+        for (int i = 0; i < cartItemList.size(); i++) {
+            CartItem item = cartItemList.get(i);
+
+            sumtotal += (Float.parseFloat(String.valueOf(item.getProduct().getPrice())) * item.getQuantity());
+        }
+
+        totalPrice.setText(String.valueOf(sumtotal));
     }
 
     @Override

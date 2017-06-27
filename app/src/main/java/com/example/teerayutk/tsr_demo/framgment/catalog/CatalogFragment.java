@@ -51,6 +51,7 @@ import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +89,6 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_catalog, container, false);
         ButterKnife.bind(this, view);
-        //setHasOptionsMenu(true);
         present = new CatalogPresenter(this);
         viewMode.setOnClickListener(this);
 
@@ -108,40 +108,6 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.shopping_cart, menu);
-        MenuItem item = menu.findItem(R.id.action_cart);
-        MenuItemCompat.setActionView(item, R.layout.counter_menuitem_layout);
-        RelativeLayout badgeLayout = (RelativeLayout) MenuItemCompat.getActionView(item);
-        ImageView imageView = (ImageView) badgeLayout.findViewById(R.id.counterBackground);
-        TextView textView = (TextView) badgeLayout.findViewById(R.id.count);
-        cartItemList = new ExtactCartItem().getCartItems(cart);
-
-        if (cartItemList.size() > 0) {
-            for (int i = 0; i < cartItemList.size(); i ++) {
-                final CartItem cartItem = cartItemList.get(i);
-                badgeQuantity += Integer.parseInt(cartItem.getQuantity() + "");
-            }
-            imageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_cart_item));
-            textView.setText("" + badgeQuantity);
-            /*YoYo.with(Techniques.Tada)
-                    .duration(500)
-                    .playOn(badgeLayout);*/
-        } else {
-            imageView.setVisibility(View.GONE);
-            textView.setVisibility(View.GONE);
-        }
-
-        badgeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().startActivityForResult(new Intent(getActivity(), CartActivity.class), SHOPPING_CART);
-            }
-        });
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabBtn :
@@ -155,9 +121,10 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PRODUCT_DETAIL && resultCode == RESULT_CANCELED) {
-            getActivity().invalidateOptionsMenu();
-        }
+        /*if (requestCode == PRODUCT_DETAIL) {
+            if (resultCode == RESULT_OK)
+                getActivity().invalidateOptionsMenu();
+        }*/
     }
 
     @Override
@@ -211,10 +178,19 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     public void itemClicked(View view, int position) {
     }
 
-    @Override
+    /*@Override
     public void addCart(View view, int position) {
-        Product product = productList.get(position);
-        doIncrease(product);
+        cartItemList = new ExtactCartItem().getCartItems(cart);
+        if (cartItemList.size() > 0) {
+            for (int i = 0; i < cartItemList.size(); i++) {
+                final CartItem cartItem = cartItemList.get(i);
+                cartItem.setQuantity(cartItem.getQuantity() + 1);
+                //cart.add(cartItem.getProduct(), 1);
+                getActivity().invalidateOptionsMenu();
+            }
+        } else {
+            doIncrease(position);
+        }
     }
 
     @Override
@@ -225,7 +201,7 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
         bundle.putSerializable("product", product);
         intent.putExtras(bundle);
         startActivityForResult(intent, PRODUCT_DETAIL);
-    }
+    }*/
 
     @Override
     public void onLoad() {
@@ -258,8 +234,8 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.setClickListener(this);
-        adapter.addCartListener(this);
-        adapter.viewDetailListener(this);
+        /*adapter.addCartListener(this);
+        adapter.viewDetailListener(this);*/
     }
 
     public void dialogShow(int type, String title, String msg) {
@@ -271,7 +247,8 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
         sweetAlertDialog.show();
     }
 
-    private void doIncrease(Product product) {
+    private void doIncrease(int position) {
+        Product product = productList.get(position);
         cart.add(product, 1);
         badgeQuantity = 0;
         getActivity().invalidateOptionsMenu();

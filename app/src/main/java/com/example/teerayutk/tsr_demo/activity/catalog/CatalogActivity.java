@@ -26,6 +26,8 @@ import android.widget.TextView;
 
 import com.android.tonyvu.sc.model.Cart;
 import com.android.tonyvu.sc.util.CartHelper;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.teerayutk.tsr_demo.R;
 import com.example.teerayutk.tsr_demo.activity.authentication.AuthenticationActivity;
 import com.example.teerayutk.tsr_demo.activity.cart.CartActivity;
@@ -189,13 +191,17 @@ public class CatalogActivity extends AppCompatActivity{
         ActivityResultBus.getInstance().postQueue(new ActivityResultEvent(requestCode, resultCode, data));
         if (requestCode == SIGN_UP && resultCode == RESULT_CANCELED) {
             navigationView.getMenu().getItem(0).setChecked(true);
-        }
+        } /*else if (requestCode == PRODUCT_DETAIL && resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK)
+                invalidateOptionsMenu();
+        }*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //invalidateOptionsMenu();
+        badgeQuantity = 0;
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -208,11 +214,11 @@ public class CatalogActivity extends AppCompatActivity{
         TextView textViewCount = (TextView) badgeLayout.findViewById(R.id.count);
 
         cartItemList = new ExtactCartItem().getCartItems(cart);
-
         if (cartItemList.size() > 0) {
             for (int i = 0; i < cartItemList.size(); i ++) {
                 final CartItem cartItem = cartItemList.get(i);
                 badgeQuantity += Integer.parseInt(cartItem.getQuantity() + "");
+                Log.e("Item cart", cartItem.getProduct().getName() + " : " + cartItem.getQuantity());
             }
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_cart_item));
             textViewCount.setText("" + badgeQuantity);
