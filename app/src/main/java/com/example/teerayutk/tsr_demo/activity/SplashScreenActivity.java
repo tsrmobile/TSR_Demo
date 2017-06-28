@@ -1,13 +1,10 @@
 package com.example.teerayutk.tsr_demo.activity;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.teerayutk.tsr_demo.R;
@@ -15,9 +12,6 @@ import com.example.teerayutk.tsr_demo.activity.authentication.AuthenticationActi
 import com.example.teerayutk.tsr_demo.activity.catalog.CatalogActivity;
 import com.example.teerayutk.tsr_demo.utils.Config;
 import com.example.teerayutk.tsr_demo.utils.MyApplication;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

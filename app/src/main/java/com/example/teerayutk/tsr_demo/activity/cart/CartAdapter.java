@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.teerayutk.tsr_demo.R;
 import com.example.teerayutk.tsr_demo.model.cart.CartItem;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     private Context context;
+    private ClickListener clickListener;
     private List<CartItem> cartItemList = Collections.emptyList();
     public CartAdapter(Context context, List<CartItem> cartItems) {
         this.context = context;
@@ -40,8 +42,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(CartAdapter.ViewHolder holder, int position) {
         final CartItem cartItem = cartItemList.get(position);
         holder.name.setText(cartItem.getProduct().getName());
-        holder.price.setText(String.valueOf(cartItem.getProduct().getPrice()));
+        holder.price.setText(String.valueOf(cartItem.getProduct().getPrice().setScale(2, BigDecimal.ROUND_HALF_UP)));
         holder.amount.setText(String.valueOf(cartItem.getQuantity()));
+    }
+
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -49,7 +55,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return cartItemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @Bind(R.id.product_name) TextView name;
         @Bind(R.id.product_price) TextView price;
@@ -60,6 +66,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            increase.setOnClickListener(this);
+            decrease.setOnClickListener(this);
+            delete.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.btn_increase) {
+                clickListener.up(v, getPosition());
+            } else if (v.getId() == R.id.btn_decrease) {
+                clickListener.down(v, getPosition());
+            } else if (v.getId() == R.id.btn_delete_item) {
+                clickListener.trash(v, getPosition());
+            }
+        }
+    }
+
+    public interface ClickListener{
+        public void up(View view, int position);
+        public void down(View view, int position);
+        public void trash(View view, int position);
     }
 }

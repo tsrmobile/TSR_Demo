@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -112,7 +113,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface ClickListener{
-        public void itemClicked(View view, int position);
+        public void addToCart(View view, int position);
     }
 
     public class GridHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -120,16 +121,17 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @Bind(R.id.product_thumbs) ImageView productImg;
         @Bind(R.id.product_price) TextView productPrice;
         @Bind(R.id.product_detail) TextView productDetail;
+        @Bind(R.id.add_to_cart) Button addCart;
         public GridHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
+            addCart.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (clickListener != null) {
-                clickListener.itemClicked(v, getPosition());
+                clickListener.addToCart(v, getPosition());
             }
         }
     }
@@ -139,16 +141,17 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @Bind(R.id.product_thumbs) ImageView productImg;
         @Bind(R.id.product_price) TextView productPrice;
         @Bind(R.id.product_detail) TextView productDetail;
+        @Bind(R.id.add_to_cart) Button addCart;
         public ListHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
+            addCart.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (clickListener != null) {
-                clickListener.itemClicked(v, getPosition());
+                clickListener.addToCart(v, getPosition());
             }
         }
     }

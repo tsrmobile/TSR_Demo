@@ -65,10 +65,11 @@
                 android:gravity="bottom|right">
 
                 <Button
+                    android:id="@+id/add_to_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Add to cart"
+                    android:text="Buy now"
                     android:textColor="@color/White"
                     android:backgroundTint="@color/colorPrimary"/>
 

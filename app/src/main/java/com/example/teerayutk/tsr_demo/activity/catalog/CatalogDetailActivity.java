@@ -53,9 +53,9 @@ public class CatalogDetailActivity extends AppCompatActivity implements View.OnC
     List<String> imageItemList = new ArrayList<String>();
 
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.minus) Button btnMinus;
+    /*@Bind(R.id.minus) Button btnMinus;
     @Bind(R.id.plus) Button btnPlus;
-    @Bind(R.id.txtAmount) TextView amount;
+    @Bind(R.id.txtAmount) TextView amount;*/
     @Bind(R.id.price) TextView price;
     @Bind(R.id.detail) TextView detail;
     @Bind(R.id.addToCart) Button addCart;
@@ -66,8 +66,8 @@ public class CatalogDetailActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog_detail);
         ButterKnife.bind(this);
-        btnMinus.setOnClickListener(this);
-        btnPlus.setOnClickListener(this);
+        /*btnMinus.setOnClickListener(this);
+        btnPlus.setOnClickListener(this);*/
         addCart.setOnClickListener(this);
 
         initWidget();
@@ -158,23 +158,23 @@ public class CatalogDetailActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.minus :
+            /*case R.id.minus :
                 btnMinus.startAnimation(new AnimateButton().animbutton());
                 decreas();
                 break;
             case R.id.plus :
                 btnPlus.startAnimation(new AnimateButton().animbutton());
                 increase();
-                break;
+                break;*/
             case R.id.addToCart :
                 addCart.startAnimation(new AnimateButton().animbutton());
-                addtocart();
+                //addtocart();
                 break;
             default: break;
         }
     }
 
-    private void addtocart() {
+    /*private void addtocart() {
         item_amount = Integer.parseInt(amount.getText().toString());
         if (item_amount > 0) {
             cart.add(product, item_amount);
@@ -196,7 +196,7 @@ public class CatalogDetailActivity extends AppCompatActivity implements View.OnC
         if (item_amount > 0)
             item_amount--;
         amount.setText(String.valueOf(item_amount));
-    }
+    }*/
 
     public void dialogShow(int type, String title, String msg) {
         sweetAlertDialog = new SweetAlertDialog(this, type);

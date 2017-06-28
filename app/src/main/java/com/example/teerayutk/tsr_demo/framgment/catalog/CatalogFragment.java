@@ -3,6 +3,7 @@ package com.example.teerayutk.tsr_demo.framgment.catalog;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -175,7 +176,17 @@ public class CatalogFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void itemClicked(View view, int position) {
+    public void addToCart(View view, int position) {
+        Product product = productList.get(position);
+        cart.add(product, 1);
+        Intent intent = new Intent(getActivity(), CatalogDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("product", product);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, PRODUCT_DETAIL);
+        /*badgeQuantity = 0;
+        getActivity().invalidateOptionsMenu();*/
+
     }
 
     /*@Override
